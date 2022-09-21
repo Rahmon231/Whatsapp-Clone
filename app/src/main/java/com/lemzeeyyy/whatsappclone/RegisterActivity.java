@@ -38,34 +38,34 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailET.getText().toString().trim();
-                String password = passwordET.getText().toString().trim();
-                String username = userNameET.getText().toString().trim();
-               if(TextUtils.isEmpty(email)|| TextUtils.isEmpty(password) || TextUtils.isEmpty(username)){
-                   Toast.makeText(RegisterActivity.this, "Please Fill all Fields", Toast.LENGTH_SHORT).show();
-               }else {
-                   RegisterUser(username,email,password);
-               }
-            }
+        registerBtn.setOnClickListener(v -> {
+            String email = emailET.getText().toString().trim();
+            String password = passwordET.getText().toString().trim();
+            String username = userNameET.getText().toString().trim();
+           if(TextUtils.isEmpty(email)|| TextUtils.isEmpty(password) || TextUtils.isEmpty(username)){
+               Toast.makeText(RegisterActivity.this, "Please Fill all Fields",
+                       Toast.LENGTH_SHORT).show();
+           }else {
+               RegisterUser(username,email,password);
+           }
         });
     }
 
     private void RegisterUser(final String username,String email, String password) {
         auth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(task -> {
+
                     if(task.isSuccessful()){
                         FirebaseUser user = auth.getCurrentUser();
                         String userId = user.getUid();
-                        myReference = FirebaseDatabase.getInstance().getReference()
+                        myReference = FirebaseDatabase.getInstance()
+                                .getReference("MyUsers")
                                 .child(userId);
 
                         HashMap<String, String> usersInfo = new HashMap<>();
                         usersInfo.put("id",userId);
-                        usersInfo.put("email",email);
-                        usersInfo.put("password",password);
+                        usersInfo.put("imageURL", "default");
+                        usersInfo.put("status" , "offline");
                         usersInfo.put("username",username);
 
                         myReference.setValue(usersInfo)
