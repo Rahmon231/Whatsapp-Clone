@@ -2,16 +2,16 @@ package com.lemzeeyyy.whatsappclone.model;
 
 public class Users {
     private String id;
-    private String imageUrl;
+    private String imageURL;
     private String username;
     private String status;
 
     public Users() {
     }
 
-    public Users(String id, String imageUrl, String username, String status) {
+    public Users(String id, String imageURL, String username, String status) {
         this.id = id;
-        this.imageUrl = imageUrl;
+        this.imageURL = imageURL;
         this.username = username;
         this.status = status;
     }
@@ -24,12 +24,12 @@ public class Users {
         this.id = id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getUsername() {

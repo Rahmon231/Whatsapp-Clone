@@ -1,6 +1,7 @@
 package com.lemzeeyyy.whatsappclone.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.lemzeeyyy.whatsappclone.MessageActivity;
 import com.lemzeeyyy.whatsappclone.R;
 import com.lemzeeyyy.whatsappclone.model.Users;
 
@@ -43,15 +45,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder holder, int position) {
       Users user = myUsers.get(position);
       holder.username.setText(user.getUsername());
-        if (user.getImageUrl().equals("default")){
+        if (user.getImageURL().equals("default")){
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }else{
             // Adding Glide Library
             Glide.with(context)
-                    .load(user.getImageUrl())
+                    .load(user.getImageURL())
                     .into(holder.imageView);
         }
-        // Status check
+       //  Status check
         if (isChat){
 
             if(user.getStatus().equals("online")){
@@ -67,8 +69,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             holder.imageViewOn.setVisibility(View.GONE);
             holder.imageViewOff.setVisibility(View.GONE);
         }
+        holder.itemView.setOnClickListener(v -> {
+            Intent i = new Intent(context, MessageActivity.class);
+            i.putExtra("userid", user.getId());
+            context.startActivity(i);
 
-
+        });
 
     }
 
