@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lemzeeyyy.whatsappclone.R;
@@ -47,7 +48,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.MessageViewHolder holder, int position) {
-
+        Chats chat = mChats.get(position);
+        holder.show_message.setText(chat.getMessage());
+        if(imageURL.equals("default")){
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        }else {
+            Glide.with(context).load(imageURL).into(holder.profile_image);
+        }
     }
 
     @Override
