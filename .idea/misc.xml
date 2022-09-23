@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/round_corner.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25729166666666664" />
