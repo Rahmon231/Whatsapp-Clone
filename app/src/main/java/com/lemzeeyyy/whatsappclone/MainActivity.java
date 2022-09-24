@@ -25,6 +25,8 @@ import com.lemzeeyyy.whatsappclone.fragments.ProfileFragment;
 import com.lemzeeyyy.whatsappclone.fragments.UsersFragment;
 import com.lemzeeyyy.whatsappclone.model.Users;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseUser user;
@@ -82,4 +84,14 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
+    private void CheckStatus(String status){
+
+        myRef  = FirebaseDatabase.getInstance().getReference("MyUsers").child(user.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        myRef.updateChildren(hashMap);
+    }
+
 }
