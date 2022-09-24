@@ -55,6 +55,7 @@ public class ChatsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fUsers = FirebaseAuth.getInstance().getCurrentUser();
+        usersList = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("ChatList").child(fUsers.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
