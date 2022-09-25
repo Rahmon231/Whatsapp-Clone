@@ -111,6 +111,7 @@ public class MessageActivity extends AppCompatActivity {
                 editMessage.setText("");
             }
         });
+        seenMessage(userid);
 
     }
 
@@ -206,6 +207,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        reference.removeEventListener(seenListener);
         CheckStatus("online");
     }
 
