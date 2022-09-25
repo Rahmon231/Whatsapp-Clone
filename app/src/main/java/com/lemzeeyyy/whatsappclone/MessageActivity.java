@@ -44,6 +44,7 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter messageAdapter;
     List<Chats> chats;
     String userid;
+    ValueEventListener seenListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,5 +169,49 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void CheckStatus(String status){
+
+        reference  = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        reference.updateChildren(hashMap);
+    }
+    private void seenMessage(final String userid){
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot :
+                        snapshot.getChildren()) {
+                    Chats chat = dataSnapshot.getValue(Chats.class);
+                    if(chat.getReceiverId().equals(firebaseUser.getUid()) && chat.getSenderId().equals(userid)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen",true);
+                        dataSnapshot.getRef().updateChildren(hashMap);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CheckStatus("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CheckStatus("offline");
     }
 }

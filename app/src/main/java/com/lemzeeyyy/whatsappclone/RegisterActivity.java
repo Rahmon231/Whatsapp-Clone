@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -37,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.buttonRegister);
 
         auth = FirebaseAuth.getInstance();
+        ValueEventListener seenListenner;
 
         registerBtn.setOnClickListener(v -> {
             String email = emailET.getText().toString().trim();

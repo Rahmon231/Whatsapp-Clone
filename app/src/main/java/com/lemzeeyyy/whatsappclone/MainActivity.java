@@ -94,4 +94,15 @@ public class MainActivity extends AppCompatActivity {
         myRef.updateChildren(hashMap);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CheckStatus("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CheckStatus("offline");
+    }
 }
